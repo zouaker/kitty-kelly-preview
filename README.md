@@ -33,3 +33,10 @@ Confirm representation, portfolio permissions, up-to-date equipment, approved bi
 
 Preserved routes include all six original service/contact pages; the site adds a demo index and dedicated audioguide, character and narration pages. See `research/CONTENT-MAP.md` for the page-by-page inventory and `research/AUDIT-AND-DIRECTION.md` for the initial audit and revised direction.
 
+
+## GitHub Pages deployment
+The requested client preview is deployed through `.github/workflows/deploy.yml`. Pushes to the GitHub `main` branch install the locked dependencies, build, validate all local links and portfolio content, and deploy the static artifact to Pages.
+
+The workflow supplies `PUBLIC_BASE_PATH=/kitty-kelly-preview` and `PUBLIC_SITE_URL=https://zouaker.github.io/kitty-kelly-preview`. Local development defaults to `/`. All internal links, public assets, responsive image candidates and audio URLs use the shared helper in `src/lib/urls.ts`; font files use stylesheet-relative URLs. This keeps the site portable between a GitHub project path and an eventual client domain.
+
+The review remains noindex. Enabling production indexing and connecting the client domain are separate launch tasks. The original Sites hosting manifest records the earlier prototype only; GitHub Actions does not use it.

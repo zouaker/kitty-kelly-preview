@@ -1,4 +1,5 @@
 ---
+import {withBase,withBaseSrcset} from '../lib/urls';
 import {tracks} from '../data/site';
 import Icon from './Icon.astro';
 ---
@@ -8,7 +9,7 @@ import Icon from './Icon.astro';
   <div class="player-identity"><span class="sound-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><div><span class="player-kitty">KITTY KELLY</span><strong id="player-title">Commercial</strong></div></div>
   <div class="player-transport"><button id="previous-track" aria-label="Previous demo"><Icon name="previous"/></button><button id="player-toggle" class="player-toggle" aria-label="Pause demo"><Icon name="play"/><span class="pause-icon"><Icon name="pause"/></span></button><button id="next-track" aria-label="Next demo"><Icon name="next"/></button></div>
   <div class="player-timeline"><span id="elapsed">0:00</span><input id="seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Seek in demo"/><span id="duration">0:00</span></div>
-  <a id="player-download" class="download" href={'/media/'+tracks[0].file} download aria-label="Download current demo"><Icon name="download"/></a>
+  <a id="player-download" class="download" href={withBase('/media/'+tracks[0].file)} download aria-label="Download current demo"><Icon name="download"/></a>
   <button id="close-player" aria-label="Close player and stop audio"><Icon name="close"/></button>
   <p id="audio-status" role="status" aria-live="polite"></p>
  </section>

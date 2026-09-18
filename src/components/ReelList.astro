@@ -1,4 +1,5 @@
 ---
+import {withBase,withBaseSrcset} from '../lib/urls';
 import { tracks, services } from '../data/site';
 import Icon from './Icon.astro';
 const {ids=tracks.slice(0,6).map(t=>t.id), compact=false, showServices=false}=Astro.props;
@@ -8,8 +9,8 @@ const selected=ids.map((id:string)=>tracks.find(t=>t.id===id)).filter(Boolean);
  {selected.map((t:any,i:number)=><div class="reel-row" data-reel={t.id}>
   <span class="track-number">{String(i+1).padStart(2,'0')}</span>
   <button class="reel-main" type="button" data-track={t.id} aria-label={`Play ${t.title}`} aria-pressed="false"><span class="play-circle"><Icon name="play"/><span class="pause-icon"><Icon name="pause"/></span></span><span class="reel-copy"><strong>{t.title}</strong><span>{t.detail}</span></span></button>
-  {showServices && <a class="reel-service" href={"/"+services.find(s=>s.track===t.id)?.slug} aria-label={"Explore "+t.title}><Icon name="external" size={18}/></a>}<span class="track-kind">MP3</span><a class="download" href={'/media/'+t.file} download aria-label={`Download ${t.title} MP3`}><Icon name="download"/></a>
-  <noscript><audio controls preload="none" src={'/media/'+t.file} aria-label={t.title}></audio></noscript>
+  {showServices && <a class="reel-service" href={withBase("/"+services.find(s=>s.track===t.id)?.slug)} aria-label={"Explore "+t.title}><Icon name="external" size={18}/></a>}<span class="track-kind">MP3</span><a class="download" href={withBase('/media/'+t.file)} download aria-label={`Download ${t.title} MP3`}><Icon name="download"/></a>
+  <noscript><audio controls preload="none" src={withBase('/media/'+t.file)} aria-label={t.title}></audio></noscript>
  </div>)}
 </div>
 

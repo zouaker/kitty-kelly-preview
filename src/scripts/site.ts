@@ -1,3 +1,4 @@
+import {withBase} from '../lib/urls';
 type Track={id:string;title:string;detail:string;file:string;group:string};
 const audio=document.querySelector<HTMLAudioElement>('#voice-audio')!;
 const trackList:Track[]=JSON.parse(document.querySelector('#track-data')!.textContent!);
@@ -17,7 +18,7 @@ async function playTrack(id:string){
  const track=trackList.find(t=>t.id===id);if(!track)return;
  stopFilms();
  if(current?.id===id&&!audio.paused){audio.pause();return;}
- if(current?.id!==id){audio.pause();current=track;audio.src='/media/'+track.file;byId('player-title').textContent=track.title;const link=byId('player-download') as HTMLAnchorElement;link.href=audio.src;link.setAttribute('aria-label',`Download ${track.title} MP3`);}
+ if(current?.id!==id){audio.pause();current=track;audio.src=withBase('/media/'+track.file);byId('player-title').textContent=track.title;const link=byId('player-download') as HTMLAnchorElement;link.href=audio.src;link.setAttribute('aria-label',`Download ${track.title} MP3`);}
  byId('sticky-player').hidden=false;byId('audio-status').textContent='Loading demo…';reflect();
  try{await audio.play();byId('audio-status').textContent='';}catch{byId('audio-status').textContent='Playback could not start. Try Play again or download the MP3.';}reflect();
 }

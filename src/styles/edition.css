@@ -260,3 +260,15 @@ h2 em {color:var(--blue)}
 
 
 
+/* Switch to the mobile menu before the expanded navigation gets crowded. */
+@media (min-width:851px) and (max-width:1000px) {
+ .desktop-nav {display:none}
+ .header-cta {margin-left:auto}
+ .mobile-menu {display:block}
+ .mobile-menu summary {list-style:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:7px;width:40px;height:44px}
+ .mobile-menu summary::-webkit-details-marker {display:none}
+ .mobile-menu summary>span {width:24px;height:1px;background:currentColor}
+ .mobile-menu nav {position:absolute;top:100%;left:0;right:0;background:var(--paper);color:var(--ink);display:grid;grid-template-columns:1fr 1fr;padding:25px var(--gutter);gap:0 25px;box-shadow:0 8px 16px #0002}
+ .mobile-menu a {padding:12px 0;font-size:14px;border-bottom:1px solid var(--line)}
+}
+.mobile-menu a[aria-current="page"] {color:var(--blue);text-decoration:underline;text-underline-offset:5px}

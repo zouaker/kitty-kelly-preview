@@ -26,5 +26,5 @@ export const services = [
  {slug:'narration',name:'Documentary & narration',short:'Give your story room to breathe.',title:'Let the story lead.',intro:'British narration for documentaries and meditations, with space for the words to connect.',track:'documentary',tags:['Documentaries','Narration','Meditations'],body:'Listen to the documentary reel for a range of narration styles. My work also includes a guided meditation on exploring and processing grief for Soul Readings.',secondary:'A thoughtful read, for your story.',note:'Share the script, the audience and the mood you’re looking for, and we can discuss a suitable delivery.',source:'https://www.kittykelly.co.uk/otherdemos'},
 ];
 export const preview = import.meta.env.PUBLIC_INDEXABLE !== 'true';
-export const origin = import.meta.env.PUBLIC_SITE_URL || 'https://kitty-kelly-voice-preview.robust-dace-8245.chatgpt.site';
+export const origin = import.meta.env.PUBLIC_SITE_URL || 'https://zouaker.github.io/kitty-kelly-preview';
 
