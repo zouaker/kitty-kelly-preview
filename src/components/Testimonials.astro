@@ -1,0 +1,5 @@
+---
+const {type='all'}=Astro.props;
+const quotes=[{type:'corporates',quote:'When I book Kitty, I know she’ll nail it!',name:'Rosko',role:'FlyVoiceovers'},{type:'audiobooks',quote:'THE perfect narrator.',name:'Tracie Podger',role:'Author'},{type:'audiobooks',quote:'Her conversational tone and fantastic accents add a realism to the story',name:'Amy Beashel',role:'Author'},{type:'characters',quote:'She brought Serena to life with a perfect blend of humanity, passion and energy',name:'Sheldon Collins',role:'Writer & director'}].filter(q=>type==='all'||q.type===type);
+---
+<section class="section testimonials-section"><div class="section-heading"><div><p class="eyebrow">KIND WORDS, FROM GOOD PEOPLE</p><h2>A pleasure to <em>work with.</em></h2></div></div><div class="testimonial-grid">{quotes.map(q=><figure><span class="quote-mark" aria-hidden="true">“</span><blockquote>“{q.quote}”</blockquote><figcaption><strong>{q.name}</strong><span>{q.role}</span></figcaption></figure>)}</div></section>

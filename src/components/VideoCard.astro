@@ -1,0 +1,5 @@
+---
+import Icon from './Icon.astro';
+const {video,caption}=Astro.props;
+---
+<article class="film-card"><div class="film-player"><button class="film-poster" data-film={video.kind==='hls'?video.source:video.id} data-kind={video.kind} data-title={video.title} aria-label={'Play '+video.title}><img src={video.poster} width="900" height="506" loading="lazy" alt=""/><span class="film-play"><Icon name="play" size={24}/></span></button></div><div class="film-caption"><h3>{video.title}</h3><p>{caption|| (video.page==='home'?'Sponsorship ident · The Honesty Box':video.page==='corporates'?'Corporate & explainer voiceover':'Commercial voiceover')}</p><a href={video.fallback} target="_blank" rel="noopener noreferrer">Watch at source <Icon name="external" size={14}/></a></div><p class="film-status" role="status"></p></article>

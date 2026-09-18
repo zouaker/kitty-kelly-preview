@@ -1,0 +1,93 @@
+[
+  {
+    "page": "home",
+    "index": 0,
+    "kind": "hls",
+    "source": "https://video.squarespace-cdn.com/content/v1/62815503b41908114a103a3b/88bc408f-9948-4f2b-92c4-a86c7777b591/playlist.m3u8",
+    "poster": "/media/portfolio/home-video-0.webp"
+  },
+  {
+    "page": "home",
+    "index": 1,
+    "kind": "hls",
+    "source": "https://video.squarespace-cdn.com/content/v1/62815503b41908114a103a3b/fbec64fc-9487-46f7-a827-0d423aff7257/playlist.m3u8",
+    "poster": "/media/portfolio/home-video-1.webp"
+  },
+  {
+    "page": "home",
+    "index": 2,
+    "kind": "hls",
+    "source": "https://video.squarespace-cdn.com/content/v1/62815503b41908114a103a3b/d53bb670-61ee-488f-8388-d158a88dea06/playlist.m3u8",
+    "poster": "/media/portfolio/home-video-2.webp"
+  },
+  {
+    "page": "commercials",
+    "index": 0,
+    "kind": "hls",
+    "source": "https://video.squarespace-cdn.com/content/v1/62815503b41908114a103a3b/2baec3fd-8df9-411e-bc24-da6c1a09dbfd/playlist.m3u8",
+    "poster": "/media/portfolio/commercials-video-0.webp"
+  },
+  {
+    "page": "commercials",
+    "index": 1,
+    "kind": "hls",
+    "source": "https://video.squarespace-cdn.com/content/v1/62815503b41908114a103a3b/bbcff171-6c93-4346-9bed-0920f23a46b0/playlist.m3u8",
+    "poster": "/media/portfolio/commercials-video-1.webp"
+  },
+  {
+    "page": "commercials",
+    "index": 2,
+    "kind": "hls",
+    "source": "https://video.squarespace-cdn.com/content/v1/62815503b41908114a103a3b/b6ae27ce-ead4-478e-bb3b-82588940a3ff/playlist.m3u8",
+    "poster": "/media/portfolio/commercials-video-2.webp"
+  },
+  {
+    "page": "commercials",
+    "kind": "youtube",
+    "id": "EPu-0xd7BS0",
+    "title": "Creand, Part of you",
+    "poster": "/media/portfolio/video-EPu-0xd7BS0.webp"
+  },
+  {
+    "page": "corporates",
+    "kind": "youtube",
+    "id": "6UPWEAfLOAQ",
+    "title": "Why Choose Linx Lasers For Code Printing?",
+    "poster": "/media/portfolio/video-6UPWEAfLOAQ.webp"
+  },
+  {
+    "page": "corporates",
+    "kind": "youtube",
+    "id": "TNTCy_C9PhA",
+    "title": "dataEssence - Let us take care of your compliance needs",
+    "poster": "/media/portfolio/video-TNTCy_C9PhA.webp"
+  },
+  {
+    "page": "corporates",
+    "kind": "youtube",
+    "id": "89WYxcgrDGE",
+    "title": "How To Use Subcontractors Long-Term & Keep HMRC Happy - Without Using A Payroll Company",
+    "poster": "/media/portfolio/video-89WYxcgrDGE.webp"
+  },
+  {
+    "page": "corporates",
+    "kind": "youtube",
+    "id": "ttwRqtnvwlY",
+    "title": "How to hire for your e-mobility business.",
+    "poster": "/media/portfolio/video-ttwRqtnvwlY.webp"
+  },
+  {
+    "page": "corporates",
+    "kind": "youtube",
+    "id": "WfaObuyp1U8",
+    "title": "The Storage Place   Order Fulfilment Centre",
+    "poster": "/media/portfolio/video-WfaObuyp1U8.webp"
+  },
+  {
+    "page": "characters",
+    "kind": "youtube",
+    "id": "DDFuhaYxeMU",
+    "title": "Clockwork Revolution - Official Reveal Trailer",
+    "poster": "/media/portfolio/video-DDFuhaYxeMU.webp"
+  }
+]
