@@ -1,42 +1,37 @@
 # Kitty Kelly — client review website
 
-Astro static site with a persistent accessible HTML audio player, lazy video playback and an ultramarine, paper and citron editorial design with reduced-motion-aware smooth scrolling. No WebGL or 3D dependencies remain.
+Static Astro website with an ivory, aubergine and apricot editorial identity, immediate voice demos, an accessible persistent audio player, selectable featured projects and reduced-motion-aware smooth scrolling.
 
 ## Development
-Use Node 24 or a version supported by Astro 7. Run 
-pm ci`, 
-pm run dev`, 
-pm run build`, and 
-pm run check`. The output is `dist/`. Astro 7 may start its development server as a background process; 
-px astro dev stop` stops it.
+
+Use Node 24. Run `npm ci`, `npm run dev`, `npm run build` and `npm run check`. The output is `dist/`. Astro 7 starts background servers; use `npx astro dev stop` or `npx astro preview stop` when finished. The locked dependencies were generated with npm 11.19.0.
 
 ## Content and assets
-- `src/data/site.ts`: profile, service copy, voice reels and metadata configuration.
+
+- `src/data/site.ts`: profile, service copy, voice reels and metadata.
 - `src/data/portfolio.ts`: clients, books, agents, genres, accents and video titles.
-- `research/portfolio-inventory.json` and `research/videos.json`: replaceable portfolio asset references.
-- `research/asset-manifest.json`: original public URLs and prototype asset provenance.
-- `src/components/`: shared audio, video, client, testimonial and recognition sections.
-- `src/styles/global.css`: shared component layouts. `src/styles/edition.css`: current palette, art direction and responsive adaptations.
+- `research/portfolio-inventory.json`, `research/videos.json` and `research/asset-manifest.json`: original asset references and provenance.
+- `src/components/`: shared audio, video, clients, testimonials and recognition.
+- `src/styles/global.css`: shared component layouts; `src/styles/edition.css`: current visual identity and responsive adaptations.
+- `public/media/concepts/`: two generated studio concepts in responsive WebP sizes. Replace these files and update captions/alt text when approved client photography is supplied. Original studio photos remain available.
+- `research/STUDIO-IMAGE-PROMPTS.md`: full generation prompts, references and output paths.
 
-The existing site supplied all temporary photography, logos, book covers, demos and video references. No client credits or testimonials were invented. Testimonial excerpts are abbreviated; retain original-source references when approving final copy. Video uses Squarespace HLS and YouTube on demand, with visible source links. Production should replace original-site video dependencies with client-approved assets and supply transcripts/captions.
+Existing public photography, logos, covers, audio and video remain temporary prototype material. No clients, credits, testimonials or awards were invented. Studio concept images are visibly labelled as AI-enhanced; their equipment likeness needs client approval. Factual equipment specifications remain based on Kitty's original site. Video loads from Squarespace HLS or YouTube on request, with source links. Final production assets should have approved transcripts/captions.
 
-## Review and production configuration
-Default output is deliberately 
-oindex, nofollow`, with robots disallowing crawling and an empty sitemap. For the approved production launch, set `PUBLIC_INDEXABLE=true` and `PUBLIC_SITE_URL=https://www.kittykelly.co.uk`, then rebuild. Canonical, structured-data and sitemap URLs use that setting. Do not enable indexing on the review hostname.
+## Design record
 
-The contact brief opens the visitor’s mail application. It does not post, store or claim to send messages. Direct email and both telephone numbers work independently. If a hosted contact form is wanted for production, connect an approved delivery service, implement spam protection and update the privacy copy before enabling it.
+See `research/EDITION-03.md` for the reference audit and current direction. Earlier research remains in `research/EDITION-02.md` and `research/AUDIT-AND-DIRECTION.md`. `research/CONTENT-MAP.md` documents preserved content. All service categories and 12 audio samples remain available.
 
-See `research/EDITION-02.md` for the latest colour research, page hierarchy and motion decisions.
+## Preview and production
 
-## Review checklist
-Confirm representation, portfolio permissions, up-to-date equipment, approved bios and new photography. Confirm client preferences for typography/palette. The Voice Arts recognition is a credited cast role in an award-winning production, not an individual narration award. One Voice is a nomination. Both link to official listings.
+The client preview deliberately uses `noindex, nofollow`, disallowed crawling and an empty sitemap. For an approved production launch set `PUBLIC_INDEXABLE=true`, `PUBLIC_SITE_URL=https://www.kittykelly.co.uk` and `PUBLIC_BASE_PATH=/`, then rebuild. Review representation, factual claims, studio imagery, asset permissions and client-approved copy before that launch.
 
-Preserved routes include all six original service/contact pages; the site adds a demo index and dedicated audioguide, character and narration pages. See `research/CONTENT-MAP.md` for the page-by-page inventory and `research/AUDIT-AND-DIRECTION.md` for the initial audit and revised direction.
+The contact brief opens the visitor's email application. It does not post or store messages. Visitors review and send the email themselves; direct email and telephone links remain available.
 
+## GitHub Pages
 
-## GitHub Pages deployment
-The requested client preview is deployed through `.github/workflows/deploy.yml`. Pushes to the GitHub `main` branch install the locked dependencies, build, validate all local links and portfolio content, and deploy the static artifact to Pages.
+Pushes to the GitHub `main` branch run `.github/workflows/deploy.yml`: install locked dependencies, build, validate local links and preserved content, deploy `dist` to Pages.
 
-The workflow supplies `PUBLIC_BASE_PATH=/kitty-kelly-preview` and `PUBLIC_SITE_URL=https://zouaker.github.io/kitty-kelly-preview`. Local development defaults to `/`. All internal links, public assets, responsive image candidates and audio URLs use the shared helper in `src/lib/urls.ts`; font files use stylesheet-relative URLs. This keeps the site portable between a GitHub project path and an eventual client domain.
+The workflow sets `PUBLIC_BASE_PATH=/kitty-kelly-preview`, `PUBLIC_SITE_URL=https://zouaker.github.io/kitty-kelly-preview` and `PUBLIC_INDEXABLE=false`. All local navigation/media URLs must use `src/lib/urls.ts`; fonts are stylesheet-relative. To test the GitHub path locally, build with those variables and run `npm run preview -- --port 4321`.
 
-The review remains noindex. Enabling production indexing and connecting the client domain are separate launch tasks. The original Sites hosting manifest records the earlier prototype only; GitHub Actions does not use it.
+The original `.openai/hosting.json` records historical hosting only. GitHub Actions does not use it. The repository is public temporarily for this project as requested.

@@ -58,5 +58,6 @@ async function loadFilm(button:HTMLButtonElement){
  try{const {default:Hls}=await import('hls.js');if(!video.isConnected)return;if(!Hls.isSupported()){if(video.canPlayType('application/vnd.apple.mpegurl')){video.src=source;start();}else{fail();}return;}const hls=new Hls({maxBufferLength:20,maxMaxBufferLength:30});filmCleanups.push(()=>hls.destroy());hls.attachMedia(video);hls.loadSource(source);hls.on(Hls.Events.MANIFEST_PARSED,start);hls.on(Hls.Events.ERROR,(_,data)=>{if(data.fatal)fail();});}catch{fail();}
 }
 document.addEventListener('astro:before-swap',stopFilms);
+document.addEventListener('kitty:stop-films',stopFilms);
 document.addEventListener('astro:page-load',reflect);reflect();
 

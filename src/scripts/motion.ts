@@ -32,7 +32,7 @@ function setupMotion() {
   revealObserver = new IntersectionObserver(entries => {
    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver?.unobserve(entry.target); } });
   }, { threshold: .08, rootMargin: '0px 0px -35px 0px' });
-  const items = document.querySelectorAll<HTMLElement>('.section-heading, .section-intro, .reel-row, .featured-commercial, .feature-book, .work-notes>a, .about-side, .about-photo, .testimonial-grid>figure, .home-studio>*, .recognition>a, .film-grid>.film-card, .book-grid>figure, .destination-grid>*, .studio-grid>*, .contact-grid>*');
+  const items = document.querySelectorAll<HTMLElement>('.section-heading, .section-intro, .reel-row, .work-notes>a, .about-side, .meet-images, .testimonial-grid>figure, .studio-feature-copy, .process-steps>li, .recognition>a, .film-grid>.film-card, .book-grid>figure, .destination-grid>*, .studio-grid>*, .contact-grid>*');
   items.forEach((item,index) => {
    // Keep above-fold content and focus targets visible on first render.
    if (item.getBoundingClientRect().top < window.innerHeight - 30) return;
