@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ServiceDirectory from '../components/ServiceDirectory.astro';
+import ProjectCTA from '../components/ProjectCTA.astro';
+import {withBase} from '../lib/urls';
+---
+<Layout title="British Voiceover Services" description="Explore Kitty Kelly’s British voiceover services: commercials, corporate and eLearning, audiobooks, audioguides, character voices and documentary narration.">
+ <PageHero label="Voiceover services" title="One voice." accent="So many possibilities." intro="From a few unforgettable seconds to a story you can’t put down. Find the right voice for your project." image="/media/concepts/microphone-close-1200.webp" action="#services" actionLabel="Explore the services"/>
+ <section class="section" id="services"><div class="section-heading"><div><p class="eyebrow">FIND YOUR KIND OF STORY</p><h2>What are we<br/><em>making together?</em></h2></div><a class="text-link" href={withBase('/demos')}>Go straight to the demos</a></div><ServiceDirectory/></section>
+ <section class="section process-section"><div class="section-heading"><div><p class="eyebrow">A CLEAR WAY TO WORK TOGETHER</p><h2>From first idea<br/><em>to final read.</em></h2></div></div><ol class="process-steps"><li><span>01</span><h3>Share your brief.</h3><p>Send the script, audience, usage, territories and timings. We can discuss the tone and a custom audition.</p></li><li><span>02</span><h3>Shape the performance.</h3><p>Agree the quote and session details. Join remotely to direct the read, or discuss an in-person recording.</p></li><li><span>03</span><h3>Bring it to life.</h3><p>Record the performance and agree the audio format and delivery details your production needs.</p></li></ol></section>
+ <ProjectCTA title="Not sure where to start?" intro="Tell me about your audience and what you’re making. We can work out the right approach together."/>
+</Layout>

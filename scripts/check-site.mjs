@@ -5,10 +5,20 @@ const root=path.resolve('dist');
 const base=(process.env.PUBLIC_BASE_PATH||'').replace(/\/$/,'');
 async function walk(dir){const entries=await readdir(dir,{withFileTypes:true});return(await Promise.all(entries.map(e=>e.isDirectory()?walk(path.join(dir,e.name)):path.join(dir,e.name)))).flat();}
 const files=await walk(root),htmlFiles=files.filter(f=>f.endsWith('.html'));const errors=[];
-const routes=['commercials','corporates','audiobooks','otherdemos','studio','contact','demos','audioguides','characters','narration'];
+const routes=['commercials','corporates','audiobooks','otherdemos','studio','contact','demos','audioguides','characters','narration','about','work','voiceover'];
 for(const route of routes)assert(files.includes(path.join(root,route,'index.html')),`Missing ${route}`);
 for(const file of htmlFiles){const html=await readFile(file,'utf8');const label=path.relative(root,file);if((html.match(/<h1(?:\s|>)/g)||[]).length!==1)errors.push(label+': expected one H1');if(!html.includes('name="description"'))errors.push(label+': missing description');if(!html.includes('noindex, nofollow'))errors.push(label+': review site must be noindex');if(/<canvas|sound-stage|three-dimensional/i.test(html))errors.push(label+': 3D remains');
  for(const match of html.matchAll(/(?:href|src)="(\/[^"?#]*)(?:[?#][^"]*)?"/g)){const target=decodeURIComponent(match[1]);if(target.startsWith('//'))continue;if(base && !target.startsWith(base+'/'))errors.push(`${label}: unprefixed project URL ${target}`);const relative=base&&target.startsWith(base+'/')?target.slice(base.length):target;const resolved=path.join(root,relative);const possible=[resolved,path.join(resolved,'index.html'),resolved+'.html'];if(!(await Promise.all(possible.map(p=>stat(p).then(s=>s.isFile()).catch(()=>false)))).some(Boolean))errors.push(`${label}: broken local reference ${target}`);}
+ const header=html.match(/<header class="site-header">([\s\S]*?)<\/header>/)?.[1];
+ if(!header)errors.push(label+': missing shared header');
+ else {
+  for(const route of ['about','work','demos','studio','contact','voiceover'])if(!header.includes('/'+route+'/'))errors.push(label+': missing primary destination '+route);
+  if(header.includes('#about')||header.includes('#work'))errors.push(label+': primary navigation unexpectedly returns to homepage sections');
+  if(/<summary>[^<]+<span/.test(header))errors.push(label+': old dropdown-arrow markup returned');
+  for(const [,href] of header.matchAll(/href="([^"]+)"/g))if(href.startsWith('/')&&!new URL(href.replaceAll('&amp;','&'),'https://preview.test').searchParams.has('v'))errors.push(label+': unversioned preview navigation '+href);
+ }
+ // All in-document indexes must resolve, including the new portfolio categories.
+ for(const [,id] of html.matchAll(/href="#([^"]+)"/g))if(!html.includes('id="'+id+'"'))errors.push(label+': broken section link #'+id);
  for(const match of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)){try{JSON.parse(match[1]);}catch{errors.push(label+': invalid structured data');}}
 }
 const pages={};for(const route of routes)pages[route]=await readFile(path.join(root,route,'index.html'),'utf8');

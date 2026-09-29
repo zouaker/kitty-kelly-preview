@@ -1,0 +1,5 @@
+---
+import {withBase} from '../lib/urls';
+const {title='Have a story in mind?',intro='Share your script, audience and timings. Let’s talk about the right voice for your project.',service}=Astro.props;
+---
+<section class="project-cta"><div><p class="eyebrow">LET’S MAKE IT HAPPEN</p><h2>{title}</h2><p>{intro}</p></div><a class="button lime" href={withBase('/contact'+(service?'?service='+encodeURIComponent(service):''))}>Talk about your project</a></section>

@@ -68,6 +68,9 @@ function setupRibbon(ribbon: HTMLElement, signal: AbortSignal) {
     dragging = false;
   let resumeAt = 0;
   let subpixel = 0;
+  let direction = 1;
+  let lastPointerTime = 0;
+  let releaseSpeed = 28;
   ribbon.classList.add("is-ready");
   controls.hidden = false;
   const normalise = () => {
@@ -104,7 +107,7 @@ function setupRibbon(ribbon: HTMLElement, signal: AbortSignal) {
     const dt = Math.min((now - last) / 1000 || 0, 0.04);
     last = now;
     if (!dragging && pointer === null && now > resumeAt) {
-      speed += (targetSpeed - speed) * Math.min(1, dt * 6);
+      speed += (targetSpeed - speed) * Math.min(1, dt * 2.5);
       // Keep fractional travel: scrollLeft rounds small deltas on some browsers.
       subpixel += speed * dt;
       const travel = Math.trunc(subpixel);
@@ -125,7 +128,9 @@ function setupRibbon(ribbon: HTMLElement, signal: AbortSignal) {
       raf = requestAnimationFrame(tick);
     }
   };
-  const step = (direction: number) => {
+  const step = (nextDirection: number) => {
+    direction = nextDirection;
+    speed = targetSpeed = direction * 28;
     viewport.scrollLeft += direction * 180;
     normalise();
     resumeAt = performance.now() + 1800;
@@ -164,6 +169,8 @@ function setupRibbon(ribbon: HTMLElement, signal: AbortSignal) {
       pointer = event.pointerId;
       startX = lastX = event.clientX;
       startY = event.clientY;
+      lastPointerTime = performance.now();
+      releaseSpeed = 28;
       dragging = false;
     },
     { signal },
@@ -182,15 +189,22 @@ function setupRibbon(ribbon: HTMLElement, signal: AbortSignal) {
           viewport.classList.add("is-dragging");
         }
         if (dragging) {
-          viewport.scrollLeft -= event.clientX - lastX;
+          const delta = lastX - event.clientX;
+          const now = performance.now();
+          if (Math.abs(delta) > 0.2) {
+            direction = Math.sign(delta);
+            releaseSpeed = Math.min(260, Math.max(28, Math.abs(delta) / Math.max(0.008, (now - lastPointerTime) / 1000)));
+          }
+          lastPointerTime = now;
+          viewport.scrollLeft += delta;
           normalise();
         }
         lastX = event.clientX;
       } else if (event.pointerType === "mouse") {
         const bounds = viewport.getBoundingClientRect();
         targetSpeed =
-          28 +
-          Math.abs((event.clientX - bounds.left) / bounds.width - 0.5) * 160;
+          direction * (28 +
+          Math.abs((event.clientX - bounds.left) / bounds.width - 0.5) * 160);
       }
     },
     { signal },
@@ -199,18 +213,23 @@ function setupRibbon(ribbon: HTMLElement, signal: AbortSignal) {
     if (pointer !== event.pointerId) return;
     if (viewport.hasPointerCapture(event.pointerId))
       viewport.releasePointerCapture(event.pointerId);
+    if (dragging) {
+      speed = direction * releaseSpeed;
+      subpixel = 0;
+    }
     pointer = null;
     dragging = false;
     viewport.classList.remove("is-dragging");
-    resumeAt = performance.now() + 1200;
-    targetSpeed = 28;
+    resumeAt = 0;
+    targetSpeed = direction * 28;
+    sync();
   };
   window.addEventListener("pointerup", finish, { signal });
   viewport.addEventListener("pointercancel", finish, { signal });
   viewport.addEventListener(
     "pointerleave",
     () => {
-      targetSpeed = 28;
+      targetSpeed = direction * 28;
     },
     { signal },
   );

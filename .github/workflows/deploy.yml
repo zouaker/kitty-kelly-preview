@@ -17,6 +17,7 @@ jobs:
       PUBLIC_BASE_PATH: /kitty-kelly-preview
       PUBLIC_SITE_URL: https://zouaker.github.io/kitty-kelly-preview
       PUBLIC_INDEXABLE: 'false'
+      PUBLIC_RELEASE_ID: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

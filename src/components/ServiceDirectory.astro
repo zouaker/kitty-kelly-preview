@@ -1,0 +1,7 @@
+---
+import {services} from '../data/site';
+import {pageArt} from '../data/page-art';
+import {withBase} from '../lib/urls';
+const {exclude}=Astro.props;
+---
+<div class="service-directory">{services.filter(s=>s.slug!==exclude).map(s=><a href={withBase('/'+s.slug)}><figure><img src={withBase(pageArt[s.slug].image.replace('-1440.webp','-720.webp'))} width="600" height="400" loading="lazy" alt=""/></figure><h3>{s.name}</h3><p>{s.short}</p><span>Listen & explore</span></a>)}</div>

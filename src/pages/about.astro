@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Recognition from '../components/Recognition.astro';
+import Testimonials from '../components/Testimonials.astro';
+import ProjectCTA from '../components/ProjectCTA.astro';
+import {withBase} from '../lib/urls';
+import {profile} from '../data/site';
+import {accents} from '../data/portfolio';
+---
+<Layout title="About Kitty Kelly — British Voiceover Artist" description="Meet Kitty Kelly: a Drama Studio London-trained British actress, voiceover artist and audiobook narrator, with a studio in Valencia and a base in London.">
+ <PageHero label="About Kitty" title="Actor by training." accent="Storyteller at heart." intro="A London voice. A life in Valencia. A love of finding the person behind the words." image="/media/portrait.jpg" imageAlt="Kitty Kelly, British voiceover actress" portrait action="#meet-kitty" actionLabel="A little about me"/>
+ <nav class="page-route-nav" aria-label="On this page"><span>Meet Kitty</span><a href="#meet-kitty">Background</a><a href="#range">Voice & accents</a><a href={withBase('/work')}>Selected work</a><a href={withBase('/studio')}>The studio</a><a href={profile.spotlight} target="_blank" rel="noopener noreferrer">Spotlight CV</a></nav>
+ <section class="section about-story" id="meet-kitty"><div><p class="eyebrow">THE PERSON BEHIND THE VOICE</p><h2>Warmth. Wit.<br/><em>A little London spirit.</em></h2></div><div><p>I’m Kitty, a British actress and voiceover artist, trained at Drama Studio London. I love finding the person behind the words, whether that’s a familiar voice for a brand or a completely new character.</p><p>My studio is in Valencia, with a base back in London. I work with teams in the UK, US and Europe, from my booth or in theirs.</p><p>My work spans commercials, corporate films and eLearning, audiobooks, cultural tours, games and documentary narration. Across them all, I’m interested in making words feel human.</p><a class="text-link" href={withBase('/work')}>Explore the work</a></div><div class="about-facts"><div><strong>Drama Studio London</strong><span>Acting training</span></div><div><strong>90+</strong><span>Audiobooks narrated</span></div><div><strong>London Estuary</strong><span>My natural accent</span></div></div></section>
+ <Recognition/>
+ <section class="section accent-section" id="range"><div><p class="eyebrow">A VOICE WITH CHARACTER</p><h2>Familiar warmth.<br/><em>Room to play.</em></h2><p>London Estuary and soft RP are my natural narration styles. Character work brings a much wider range of regional and international accents into the recording booth.</p><a class="text-link" href={withBase('/demos')}>Listen to the range</a></div><div class="tag-list">{accents.map(accent=><span>{accent}</span>)}</div></section>
+ <section class="section home-studio"><figure><img src={withBase('/media/portfolio/studio-5.webp')} width="750" height="500" loading="lazy" alt="Kitty’s original recording desk and microphone inside her booth"/></figure><div><p class="eyebrow">LONDON ROOTS. VALENCIA STUDIO.</p><h2>Wherever you are,<br/><em>let’s connect.</em></h2><p>A dedicated recording booth and remote direction through SourceConnect, Cleanfeed, Zoom or SessionLink. In-person recording can also be discussed.</p><a class="text-link" href={withBase('/studio')}>Explore the studio</a></div></section>
+ <Testimonials/>
+ <ProjectCTA title="Let’s find your voice."/>
+</Layout>

@@ -1,0 +1,17 @@
+---
+import {withBase,withBaseSrcset} from '../lib/urls';
+import {tracks} from '../data/site';
+import Icon from './Icon.astro';
+const {label,title,accent='',intro,image,imageAlt='',imagePosition='center',track,action,actionLabel='Explore',parent,compact=false,portrait=false}=Astro.props;
+const demo=tracks.find(t=>t.id===track);
+---
+<section class:list={['page-hero',{'page-hero-compact':compact,'page-hero-portrait':portrait}]}>
+ <img class="page-hero-image" src={withBase(image)} srcset={image.includes('/editorial/')?withBaseSrcset(image.replace('-1440','-720')+' 720w, '+image+' 1440w'):undefined} sizes="100vw" alt={imageAlt} width="1440" height="960" fetchpriority="high" style={{objectPosition:imagePosition}}/>
+ <div class="page-hero-overlay" aria-hidden="true"></div>
+ <div class="page-hero-content">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><a href={withBase('/')}>Home</a><span aria-hidden="true">/</span>{parent&&<><a href={withBase(parent.href)}>{parent.label}</a><span aria-hidden="true">/</span></>}<span aria-current="page">{label}</span></nav>
+  <p class="eyebrow">{label}</p><h1>{title}{accent&&<><br/><em>{accent}</em></>}</h1><p class="page-hero-intro">{intro}</p>
+  {action&&<a class="button lime page-hero-action" href={withBase(action)}>{actionLabel}</a>}
+ </div>
+ {demo&&<div class="hero-demo"><span class="eyebrow">A FIRST LISTEN</span><button type="button" data-track={demo.id} aria-label={'Play '+demo.title} aria-pressed="false"><span class="hero-demo-play"><Icon name="play" size={19} class="hero-play-icon"/><Icon name="pause" size={19} class="hero-pause-icon"/></span><span>{demo.title}<small>Listen to the voice demo</small></span></button><a href={withBase('/media/'+demo.file)} download aria-label={'Download '+demo.title+' MP3'}><Icon name="download" size={19}/></a></div>}
+</section>
