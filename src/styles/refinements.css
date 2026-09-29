@@ -37,6 +37,9 @@ body:has(.portrait-stage) .site-header {
   background: var(--paper);
   color: var(--ink);
   border: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 20px;
 }
 body:has(.portrait-stage) .site-header {
   background: transparent;
@@ -55,23 +58,70 @@ body:has(.portrait-stage) .site-header.is-scrolled .wordmark {
   color: var(--ink);
 }
 .site-header .desktop-nav {
-  margin-left: auto;
-  gap: 27px;
-  font-size: 13px;
-  font-weight: 500;
+  margin: 0;
+  justify-self: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: clamp(14px, 1.2vw, 17px);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.site-header .wordmark {
+  justify-self: start;
+}
+.site-header .desktop-nav > a,
+.site-header .nav-disclosure > summary {
+  min-height: 46px;
+  padding: 11px clamp(9px, 1vw, 16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+}
+.site-header .desktop-nav a,
+.site-header .nav-disclosure > summary,
+.site-header .mobile-menu a {
+  text-decoration: none;
+  transition: color 320ms ease, background-color 320ms ease;
+}
+.site-header .desktop-nav > a[aria-current="page"],
+.site-header .mobile-menu a[aria-current="page"] {
+  background: #ebbc982e;
+  color: #78484e;
+}
+body:has(.portrait-stage) .site-header:not(.is-scrolled) .desktop-nav > a[aria-current="page"] {
+  background: #ffffff12;
+  color: #f3c4a3;
+}
+.site-header .desktop-nav a:is(:hover, :focus-visible),
+.site-header .desktop-nav > a[aria-current="page"]:is(:hover, :focus-visible),
+.site-header .nav-disclosure > summary:is(:hover, :focus-visible),
+.site-header .nav-disclosure[open] > summary,
+.site-header .mobile-menu a:is(:hover, :focus-visible) {
+  background: #f3c4a3;
+  color: #352536;
+  text-decoration: none;
+}
+body:has(.portrait-stage) .site-header:not(.is-scrolled) .desktop-nav > a[aria-current="page"]:is(:hover, :focus-visible) {
+  background: #f3c4a3;
+  color: #352536;
 }
 .site-header .header-cta {
-  margin-left: 8px;
-  padding: 14px 21px;
+  justify-self: end;
+  margin-left: 0;
+  padding: 14px 24px;
   border-radius: 100px;
   background: var(--lime);
   border-color: var(--lime);
   color: var(--ink);
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 320ms ease, color 320ms ease, border-color 320ms ease;
 }
-.site-header .header-cta:hover {
-  background: #efc5a8;
-  border-color: #efc5a8;
+.site-header .header-cta:is(:hover, :focus-visible) {
+  background: #51364c;
+  border-color: #51364c;
+  color: #fff3e8;
 }
 .header-cta .mobile-cta-label {
   display: none;
@@ -81,19 +131,6 @@ body:has(.portrait-stage) .site-header.is-scrolled .wordmark {
   align-items: center;
   gap: 5px;
   min-height: 44px;
-}
-.nav-disclosure summary span {
-  font-size: 17px;
-  color: var(--lime);
-  line-height: 1;
-  margin-left: 2px;
-}
-.is-scrolled .nav-disclosure summary span,
-body:not(:has(.portrait-stage)) .nav-disclosure summary span {
-  color: var(--blue);
-}
-.nav-disclosure[open] summary span {
-  transform: rotate(180deg);
 }
 .nav-disclosure > div {
   top: 49px;
@@ -107,12 +144,8 @@ body:not(:has(.portrait-stage)) .nav-disclosure summary span {
 }
 .nav-disclosure > div > a {
   padding: 11px 12px;
-  font-size: 13px;
-  border-radius: 2px;
-}
-.nav-disclosure > div > a:hover {
-  background: var(--mint);
-  text-decoration: none;
+  font-size: 14px;
+  border-radius: 8px;
 }
 body:not(:has(.portrait-stage)) #main {
   padding-top: 92px;
@@ -416,11 +449,11 @@ html {
 }
 @media (max-width: 1100px) {
   .site-header .desktop-nav {
-    gap: 18px;
-    font-size: 12px;
+    gap: 0;
+    font-size: 14px;
   }
   .site-header .header-cta {
-    font-size: 11px;
+    font-size: 13px;
     padding-inline: 17px;
   }
   .studio-story-copy {
@@ -441,6 +474,17 @@ html {
   }
 }
 @media (max-width: 1000px) {
+  .site-header,
+  body:has(.portrait-stage) .site-header {
+    display: flex;
+  }
+  .site-header .mobile-menu a {
+    text-align: center;
+    border: 0;
+    border-radius: 12px;
+    padding: 13px 10px;
+    font-size: 15px;
+  }
   .site-header .header-cta {
     margin-left: auto;
   }
@@ -646,6 +690,12 @@ html {
     transform: none;
   }
   .site-header {
+    transition: none;
+  }
+  .site-header .desktop-nav a,
+  .site-header .nav-disclosure > summary,
+  .site-header .mobile-menu a,
+  .site-header .header-cta {
     transition: none;
   }
 }
