@@ -1,0 +1,13 @@
+---
+import { clients } from '../data/portfolio';
+import { withBase } from '../lib/urls';
+import Icon from './Icon.astro';
+const selected=[0,5,8,13,3,10,11,2,17,19].map(i=>clients.commercials[i]).concat([clients.audiobooks[7],clients.audiobooks[3]]);
+const lightMarks = new Set(['Boots','The Guardian','Sweaty Betty','Hoseasons']);
+---
+<section class="client-ribbon" aria-label="Selected clients" data-client-ribbon>
+ <div class="ribbon-heading"><p class="eyebrow">IN VERY GOOD COMPANY</p><div class="ribbon-controls" hidden><span class="ribbon-hint">Drag to explore</span><button type="button" data-ribbon-prev aria-label="Previous client logos"><Icon name="arrow" size={17}/></button><button type="button" data-ribbon-toggle aria-label="Pause automatic logo movement" aria-pressed="false"><Icon name="pause" size={15} class="ribbon-pause-icon"/><Icon name="play" size={15} class="ribbon-play-icon"/><span>Pause</span></button><button type="button" data-ribbon-next aria-label="Next client logos"><Icon name="arrow" size={17}/></button></div></div>
+ <div class="ribbon-viewport" tabindex="0" role="region" aria-label="Client logos. Use left and right arrow keys to explore." data-lenis-prevent>
+  <div class="ribbon-track">{[0,1,2].map(copy=><ul class="ribbon-group" aria-hidden={copy!==1?'true':undefined} data-logo-clone={copy!==1?'':undefined}>{selected.map(c=><li><img class:list={{'light-mark':lightMarks.has(c.name)}} src={withBase(c.image)} width="180" height="72" loading="lazy" draggable="false" alt={copy===1?c.name:''}/></li>)}</ul>)}</div>
+ </div>
+</section>
